@@ -1,0 +1,61 @@
+/*********CountryName_ProjectLevel*******/
+
+ 	def countryName= "Sweden"
+
+	log.info("CountryName : " + " " +countryName)
+
+	testRunner.testCase.testSuite.project.setPropertyValue("CountryName", countryName)
+
+
+
+/*********CountryName_GlobalLevel*******/
+
+	def countryName= "Sweden"
+
+	log.info("CountryName : " + " " +countryName)
+
+
+	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("CountryName", countryName.toString())
+
+
+/*********CountryAbbrviation_ProjectLevel*******/
+
+	import groovy.util.XmlSlurper
+
+	def responseContent = testRunner.testCase.getTestStepByName("getAirportInformationByCityOrAirportName").getPropertyValue("response")
+	log.info(responseContent)
+
+	def xmlResponse = new XmlSlurper().parseText(responseContent)
+	def slurperResponse = new XmlSlurper().parseText(xmlResponse.Body.getAirportInformationByCityOrAirportNameResponse.getAirportInformationByCityOrAirportNameResult.toString())
+
+	assert slurperResponse.Table.CountryAbbrviation[0] == "SE"
+
+	def countryAbbrviation = slurperResponse.Table.CountryAbbrviation[0]
+
+	log.info("CountryName :" +" " +  countryAbbrviation)
+
+	testRunner.testCase.testSuite.project.setPropertyValue("CountryAbbrviation", countryAbbrviation.toString())
+
+
+
+/*********CountryAbbrviation_GlobalLevel*******/
+
+	import groovy.util.XmlSlurper
+
+	def responseContent = testRunner.testCase.getTestStepByName("getAirportInformationByCityOrAirportName").getPropertyValue("response")
+	log.info(responseContent)
+
+	def xmlResponse = new XmlSlurper().parseText(responseContent)
+	def slurperResponse = new XmlSlurper().parseText(xmlResponse.Body.getAirportInformationByCityOrAirportNameResponse.getAirportInformationByCityOrAirportNameResult.toString())
+
+	assert slurperResponse.Table.CountryAbbrviation[0] == "SE"
+
+	def countryAbbrviation = slurperResponse.Table.CountryAbbrviation[0]
+
+	log.info("CountryName :" +" " +  countryAbbrviation)
+
+	com.eviware.soapui.SoapUI.globalProperties.setPropertyValue("CountryAbbrviation", countryAbbrviation.toString())
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
